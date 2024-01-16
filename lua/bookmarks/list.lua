@@ -441,6 +441,16 @@ require("bookmarks.list").load{
     return string.gsub(tpl, "_", sub)
 end
 
+function GetRootDir()
+    local clients = vim.lsp.get_active_clients()
+    for _, client in ipairs(clients) do
+        if client.config.root_dir then
+            return client.config.root_dir
+        end
+    end
+    return nil
+end
+
 -- Restore bookmarks from disk file.
 function M.load_data()
     -- vim.notify("load bookmarks data", "info")
@@ -450,6 +460,10 @@ function M.load_data()
         cwd = string.gsub(api.nvim_eval("getcwd()"), "[\\:]", "_")
     else
         cwd = string.gsub(api.nvim_eval("getcwd()"), config.sep_path, "_")
+    end
+    local root_dir = GetRootDir()
+    if root_dir then
+        cwd = string.gsub(root_dir, config.sep_path, "_")
     end
     if data.cwd ~= nil and cwd ~= data.cwd then -- maybe change session
         M.persistent()
