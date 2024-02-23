@@ -7,7 +7,7 @@ function M.setup(user_config)
         storage_dir = "", -- default vim.fn.stdpath("data").."/bookmarks",
         mappings_enabled = true,
         keymap = {
-            toggle = "<tab><tab>",     -- toggle bookmarks
+            toggle = "<leader>fm",     -- toggle bookmarks
             close = "q",               -- close bookmarks (buffer mapping)
             add = "\\z",               -- add bookmarks
             add_global = "\\g",        -- add global bookmarks
