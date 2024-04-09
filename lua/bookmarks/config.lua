@@ -9,8 +9,8 @@ function M.setup(user_config)
         keymap = {
             toggle = "<leader>fm",     -- toggle bookmarks
             close = "q",               -- close bookmarks (buffer mapping)
-            add = "\\z",               -- add bookmarks
-            add_global = "\\g",        -- add global bookmarks
+            add = "\\zl",              -- add bookmarks
+            add_global = "\\zg",       -- add global bookmarks
             jump = "<CR>",             -- jump from bookmarks
             delete = "dd",             -- delete bookmarks
             order = "<space><space>",  -- order bookmarks by frequency or updated_time
@@ -40,7 +40,7 @@ function M.setup(user_config)
 
     if user_config ~= nil and type(user_config) == "table" then
         for dk, dv in pairs(M.data) do
-            if type(dv) ~= "table" or dk == 'virt_pattern' or dk == 'virt_ignore_pattern' then
+            if type(dv) ~= "table" or dk == "virt_pattern" or dk == "virt_ignore_pattern" then
                 if user_config[dk] ~= nil then
                     M.data[dk] = user_config[dk]
                 end

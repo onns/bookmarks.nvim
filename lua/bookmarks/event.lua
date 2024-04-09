@@ -26,26 +26,31 @@ function M.key_bind()
     end
 
     -- add local bookmarks
-    vim.keymap.set("n", config.keymap.add, function() require("bookmarks").add_bookmarks(false) end,
-        { desc = "bookmarks add", silent = true })
+    vim.keymap.set("n", config.keymap.add, function()
+        require("bookmarks").add_bookmarks(false)
+    end, { desc = "bookmarks add", silent = true })
     -- add global bookmarks
-    vim.keymap.set("n", config.keymap.add_global, function() require("bookmarks").add_bookmarks(true) end,
-        { desc = "bookmarks add global", silent = true })
+    vim.keymap.set("n", config.keymap.add_global, function()
+        require("bookmarks").add_bookmarks(true)
+    end, { desc = "bookmarks add global", silent = true })
     -- toggle bookmarks window
-    vim.keymap.set("n", config.keymap.toggle, function() require("bookmarks").toggle_bookmarks() end,
-        { desc = "bookmarks toggle", silent = true })
+    vim.keymap.set("n", config.keymap.toggle, function()
+        require("bookmarks").toggle_bookmarks()
+    end, { desc = "bookmarks toggle", silent = true })
     -- delete bookmarks
-    vim.keymap.set("n", config.keymap.delete_on_virt, function() require("bookmarks.list").delete_on_virt() end,
-        { desc = "bookmarks delete", silent = true })
+    vim.keymap.set("n", config.keymap.delete_on_virt, function()
+        require("bookmarks.list").delete_on_virt()
+    end, { desc = "bookmarks delete", silent = true })
     -- show bookmarks description.
-    vim.keymap.set("n", config.keymap.show_desc, function() require("bookmarks.list").show_desc() end,
-        { desc = "bookmarks show desc", silent = true })
+    vim.keymap.set("n", config.keymap.show_desc, function()
+        require("bookmarks.list").show_desc()
+    end, { desc = "bookmarks show desc", silent = true })
 end
 
 --
 function M.autocmd()
     api.nvim_create_autocmd({ "VimLeave" }, {
-        callback = l.persistent
+        callback = l.persistent,
     })
 
     api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -55,7 +60,7 @@ function M.autocmd()
             end
             local buf = api.nvim_get_current_buf()
             m.set_marks(buf, l.get_buf_bookmark_lines(buf))
-        end
+        end,
     })
 
     api.nvim_create_autocmd({ "BufWinEnter" }, {
@@ -63,7 +68,7 @@ function M.autocmd()
         callback = function()
             local buf = api.nvim_get_current_buf()
             m.set_marks(buf, l.get_buf_bookmark_lines(buf))
-        end
+        end,
     })
 end
 
